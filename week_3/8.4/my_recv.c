@@ -13,7 +13,7 @@
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<errno.h>
-#include<my_recv.h>
+#include"my_recv.h"
 
 /*自定义错误处理函数*/
 void my_err(const char * err_string,int line)
