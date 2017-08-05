@@ -50,8 +50,10 @@ int find_name(const char *name)
     }
     for(i=0;users[i].username[0] != ' ';i++)
     {
-        if(strcmp(users[i].username,name) == 0)
+        if(strcmp(users[i].username,name) == 0){
             return i;
+    
+        }
     }
     return -1;
 }
@@ -120,10 +122,13 @@ int main(void)
         //创建一个子进程来处理刚刚接收的连接请求
         if((pid = fork())==0){
             while(1){
-                if(ret = recv(conn_fd,recv_buf,sizeof(recv_buf),0)<0){
+                if((ret = recv(conn_fd,recv_buf,sizeof(recv_buf),0))<0){//赋值时要注意括号问题
                     my_err("recv",__LINE__);
                 }
+                //printf("%d\n",ret);
                 recv_buf[ret-1] = '\0';  // 数据结束标致转换为字符串结束标致
+                    
+                printf("%s\n",recv_buf);
 
                 if(flag_recv == USERNAME){
                     name_num = find_name(recv_buf);
